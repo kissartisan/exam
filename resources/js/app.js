@@ -29,4 +29,28 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    data() {
+        return {
+            name: '',
+            quantity: '',
+            price: '',
+        }
+    },
+    methods: {
+        addProduct() {
+            let product = {
+                name: this.name,
+                quantity: this.quantity,
+                price: this.price
+            };
+
+            axios.post('/products', product).then(response => {
+                alert('Product added successfully!');
+                location.reload();
+            });
+        },
+        populateFields(product) {
+            console.log('Populate fields', product);
+        }
+    }
 });
